@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente Educativo IA</title>
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="icon" href="assets/img/robot2.png" type="image/png">
+</head>
+<body>
+    
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../index.html">
+                   <i class="fas fa-robot fa-lg me-2 align-middle"></i>
+                    Asistente Educativo IA
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="../index.html">
+                                <i class="fas fa-home me-1"></i> Inicio
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/upload.html">
+                                <i class="fas fa-file-upload me-1"></i> Subir Documentos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/train.html">
+                                <i class="fas fa-brain me-1"></i> Entrenar Modelo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/assistant.html">
+                                <i class="fas fa-question-circle me-1"></i> Preguntas
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="container py-4">
+        <div class="jumbotron bg-light p-5 rounded-3 mb-4">
+            <div class="container">
+                <h1 class="display-4">Bienvenido al Asistente Educativo IA</h1>
+                <p class="lead">Una plataforma revolucionaria que utiliza inteligencia artificial para mejorar el proceso de aprendizaje.</p>
+                <hr class="my-4">
+                <p>Carga tus materiales educativos, entrena el modelo y crea un asistente inteligente personalizado para tus estudiantes.</p>
+                <div class="mt-4">
+                    <a class="btn btn-primary btn-lg me-2" href="pages/upload.html" role="button">
+                        <i class="fas fa-file-upload me-2"></i>Comenzar ahora
+                    </a>
+                    <a class="btn btn-outline-secondary btn-lg" href="#como-funciona" role="button">
+                        <i class="fas fa-info-circle me-2"></i>Cómo funciona
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <section class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-5">Características principales</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="feature-box h-100">
+                            <div class="feature-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h3>Carga de documentos</h3>
+                            <p>Sube materiales educativos en formatos TXT para alimentar la base de conocimientos del asistente.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="feature-box h-100">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3>Entrenamiento personalizado</h3>
+                            <p>Entrena el modelo con redes neuronales para adaptarlo a tus necesidades específicas y materia de estudio.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="feature-box h-100">
+                            <div class="feature-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3>Asistente interactivo</h3>
+                            <p>Permite a los estudiantes hacer preguntas y recibir respuestas precisas basadas en el material cargado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-light py-5" id="como-funciona">
+            <div class="container">
+                <h2 class="text-center mb-5">¿Cómo funciona?</h2>
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <img src="assets/img/diagrama.png" alt="Diagrama de funcionamiento" class="img-fluid rounded shadow">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="accordion" id="howItWorks">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <i class="fas fa-upload me-2"></i>Paso 1: Carga de documentos
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#howItWorks">
+                                    <div class="accordion-body">
+                                        Sube tus materiales educativos en formato TXT. El sistema procesará automáticamente su contenido para extraer la información relevante.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <i class="fas fa-cogs me-2"></i>Paso 2: Entrenamiento del modelo
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#howItWorks">
+                                    <div class="accordion-body">
+                                        Configura y entrena el modelo de red neuronal con los documentos cargados. El sistema analizará y aprenderá de la información para poder responder preguntas relevantes sobre la materia.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <i class="fas fa-question-circle me-2"></i>Paso 3: Interacción con estudiantes
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#howItWorks">
+                                    <div class="accordion-body">
+                                        Los estudiantes podrán hacer preguntas al asistente a través de una interfaz amigable. El sistema proporcionará respuestas basadas en el conocimiento extraído de los documentos y el entrenamiento realizado.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-5">Beneficios para la educación</h2>
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-clock fa-3x text-primary mb-3"></i>
+                                <h4 class="card-title">Ahorro de tiempo</h4>
+                                <p class="card-text">Los profesores pueden dedicar más tiempo a la enseñanza personalizada mientras el asistente responde preguntas frecuentes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-user-graduate fa-3x text-primary mb-3"></i>
+                                <h4 class="card-title">Aprendizaje a ritmo propio</h4>
+                                <p class="card-text">Los estudiantes pueden consultar dudas a su propio ritmo, sin miedo a preguntar repetidamente.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                                <h4 class="card-title">Análisis de datos</h4>
+                                <p class="card-text">Obtén insights sobre las preguntas más comunes para mejorar tus materiales educativos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-universal-access fa-3x text-primary mb-3"></i>
+                                <h4 class="card-title">Accesibilidad</h4>
+                                <p class="card-text">Acceso 24/7 a la información, permitiendo estudiar en cualquier momento y lugar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Asistente Educativo IA</h5>
+                    <p>Una plataforma de aprendizaje asistido por inteligencia artificial para mejorar la experiencia educativa.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-white-50" href="index.html">Inicio</a></li>
+                        <li><a class="text-white-50" href="pages/upload.html">Documentos</a></li>
+                        <li><a class="text-white-50" href="pages/train.html">Entrenamiento</a></li>
+                        <li><a class="text-white-50" href="pages/assistant.html">Preguntas</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contacto</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-white-50" href="mailto:asistentevirtual@gmail.com"><i class="fas fa-envelope me-2"></i>asistentevirtual@gmail.com</a></li>
+                        <li><a class="text-white-50" href="#"><i class="fas fa-phone me-2"></i>+57 3114255527</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 Asistente Educativo IA. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .feature-box {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            background-color: white;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #4e54c8;
+            margin-bottom: 15px;
+        }
+    </style>
+</body>
+</html>

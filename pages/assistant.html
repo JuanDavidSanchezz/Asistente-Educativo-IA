@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente Virtual IA</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="../assets/img/robot2.png" type="image/png">
+    <style>
+        :root {
+            --primary-color: #4e54c8;
+            --secondary-color: #8f94fb;
+            --accent-color: #6c63ff;
+            --light-bg: #f8f9fa;
+            --dark-text: #343a40;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .gradient-custom {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .chat-container {
+            height: 65vh;
+            overflow-y: auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background-color: #e9ecef;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .bot-message {
+            background-color: var(--accent-color);
+            color: white;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .input-group {
+            border-radius: 25px;
+            overflow: hidden;
+        }
+        
+        .form-control {
+            border-radius: 25px 0 0 25px !important;
+            border: 1px solid #ced4da;
+        }
+        
+        .send-btn {
+            border-radius: 0 25px 25px 0 !important;
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        
+        .send-btn:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .info-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../index.html">
+                   <i class="fas fa-robot fa-lg me-2 align-middle"></i>
+                    Asistente Educativo IA
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="fas fa-home me-1"></i> Inicio
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="upload.html">
+                                <i class="fas fa-file-upload me-1"></i> Subir Documentos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="train.html">
+                                <i class="fas fa-brain me-1"></i> Entrenar Modelo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="assistant.html">
+                                <i class="fas fa-question-circle me-1"></i> Preguntas
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="chat-container" id="chatContainer">
+                    <!-- Mensaje de bienvenida del bot -->
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message bot-message">
+                            ¡Hola! Soy tu asistente virtual basado en los documentos con los que he sido entrenado. ¿En qué puedo ayudarte hoy?
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Input para preguntas -->
+                <form id="questionForm">
+                    <div class="input-group mb-3">
+                        <input type="text" id="pregunta" name="pregunta" class="form-control" placeholder="Escribe tu pregunta aquí..." aria-label="Pregunta">
+                        <button type="submit" class="btn btn-primary send-btn" id="sendButton">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Información adicional -->
+        <div class="row mt-4">
+            <div class="col-md-4 mb-3">
+                <div class="card info-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-info-circle text-primary me-2"></i>Acerca del Asistente</h5>
+                        <p class="card-text">Este asistente virtual utiliza redes neuronales entrenadas con documentos específicos para responder a tus consultas de manera precisa.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card info-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb text-warning me-2"></i>Consejos</h5>
+                        <p class="card-text">Para obtener mejores respuestas, sé específico en tus preguntas y proporciona contexto cuando sea necesario.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card info-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-cog text-secondary me-2"></i>Configuración</h5>
+                        <p class="card-text">Puedes personalizar las respuestas del asistente ajustando los parámetros de entrenamiento en la sección "Entrenar Modelo".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Asistente Educativo IA</h5>
+                    <p>Una plataforma de aprendizaje asistido por inteligencia artificial para mejorar la experiencia educativa.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-white-50" href="../index.html">Inicio</a></li>
+                        <li><a class="text-white-50" href="upload.html">Documentos</a></li>
+                        <li><a class="text-white-50" href="train.html">Entrenamiento</a></li>
+                        <li><a class="text-white-50" href="assistant.html">Preguntas</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contacto</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-white-50" href="mailto:asistentevirtual@gmail.com"><i class="fas fa-envelope me-2"></i>asistentevirtual@gmail.com</a></li>
+                        <li><a class="text-white-50" href="#"><i class="fas fa-phone me-2"></i>+57 3114255527</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 Asistente Educativo IA. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const chatContainer = document.getElementById('chatContainer');
+        const pregunta = document.getElementById('pregunta');
+        const questionForm = document.getElementById('questionForm');
+
+        // Añadir mensajes al chat
+        function addMessage(content, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'd-flex align-items-start mb-4';
+
+            if (isUser) {
+                messageDiv.classList.add('flex-row-reverse');
+                messageDiv.innerHTML = `
+                    <div class="message user-message">
+                        ${content}
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message bot-message">
+                        ${content}
+                    </div>
+                `;
+            }
+
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Manejar envío del formulario
+        function handleSend(e) {
+            e.preventDefault();
+            const question = pregunta.value.trim();
+            if (question === '') return;
+
+            // Añadir mensaje del usuario
+            addMessage(question, true);
+            pregunta.value = '';
+
+            // Indicador "escribiendo..."
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'd-flex align-items-start mb-4';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message bot-message">
+                    <div class="loading"></div> Escribiendo...
+                </div>
+            `;
+            chatContainer.appendChild(typingDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            // Simular respuesta después de 1.5 segundos
+            setTimeout(() => {
+                // Remover el indicador de escritura
+                const typingIndicator = document.getElementById('typingIndicator');
+                if (typingIndicator) {
+                    chatContainer.removeChild(typingIndicator);
+                }
+
+                // Respuestas de ejemplo basadas en palabras clave
+                let botResponse = "";
+                
+                if (question.toLowerCase().includes("hola") || question.toLowerCase().includes("saludos")) {
+                    botResponse = "¡Hola! ¿En qué puedo ayudarte hoy?";
+                } else if (question.toLowerCase().includes("gracias")) {
+                    botResponse = "¡De nada! Estoy aquí para ayudarte.";
+                } else if (question.toLowerCase().includes("documento") || question.toLowerCase().includes("subir")) {
+                    botResponse = "Puedes subir documentos en la sección 'Subir Documentos'. Acepto archivos en formato TXT para entrenar el modelo.";
+                } else if (question.toLowerCase().includes("entrenar") || question.toLowerCase().includes("modelo")) {
+                    botResponse = "Para entrenar el modelo, ve a la sección 'Entrenar Modelo', selecciona los documentos que deseas utilizar y configura los parámetros de entrenamiento.";
+                } else {
+                    botResponse = "Lo siento, no tengo información específica sobre eso en mi base de conocimientos actual. ¿Podrías reformular tu pregunta o consultar sobre otro tema?";
+                }
+                
+                // Añadir la respuesta del bot
+                addMessage(botResponse);
+            }, 1500);
+        }
+
+        // Escuchar evento submit
+        questionForm.addEventListener('submit', handleSend);
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrenar Modelo - Asistente  content="width=device-width, initial-scale=1.0">
+    <title>Entrenar Modelo - Asistente Educativo IA</title>
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="icon" href="../assets/img/robot2.png" type="image/png">
+    <style>
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .bg-accent {
+            background-color: #6c63ff;
+            color: white;
+        }
+        
+        .btn-accent {
+            background-color: #6c63ff;
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #5a52d5;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../index.html">
+                   <i class="fas fa-robot fa-lg me-2 align-middle"></i>
+                    Asistente Educativo IA
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">
+                                <i class="fas fa-home me-1"></i> Inicio
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="upload.html">
+                                <i class="fas fa-file-upload me-1"></i> Subir Documentos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="train.html">
+                                <i class="fas fa-brain me-1"></i> Entrenar Modelo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="assistant.html">
+                                <i class="fas fa-question-circle me-1"></i> Preguntas
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container py-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Entrenar Modelo</li>
+                    </ol>
+                </nav>
+                <h1>
+                    <i class="fas fa-brain text-accent me-2"></i>
+                    Entrenamiento del Modelo
+                </h1>
+                <p class="lead">Configura y entrena el modelo de inteligencia artificial con los documentos seleccionados.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-header bg-accent text-white">
+                        <h5 class="mb-0"><i class="fas fa-cogs me-2"></i>Configuración del entrenamiento</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="#" method="POST" id="training-form">
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">1. Seleccionar documentos para entrenamiento</label>
+                                <div class="card">
+                                    <div class="card-body bg-light p-3">
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" value="" id="check-all">
+                                            <label class="form-check-label fw-bold" for="check-all">
+                                                Seleccionar todos
+                                            </label>
+                                        </div>
+                                        <hr class="my-2">
+                                        <div class="document-list" style="max-height: 200px; overflow-y: auto;">
+                                            <div class="form-check">
+                                                <input class="form-check-input doc-check" type="checkbox" value="1" id="doc1" name="documents[]">
+                                                <label class="form-check-label" for="doc1">
+                                                    <i class="far fa-file-alt text-danger me-1"></i>Introducción a la Física
+                                                    <small class="text-muted">(Física - secundaria)</small>
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input doc-check" type="checkbox" value="2" id="doc2" name="documents[]">
+                                                <label class="form-check-label" for="doc2">
+                                                    <i class="far fa-file-alt text-danger me-1"></i>Historia de América Latina
+                                                    <small class="text-muted">(Historia - secundaria)</small>
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input doc-check" type="checkbox" value="3" id="doc3" name="documents[]">
+                                                <label class="form-check-label" for="doc3">
+                                                    <i class="far fa-file-alt text-danger me-1"></i>Álgebra Básica
+                                                    <small class="text-muted">(Matemáticas - secundaria)</small>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">2. Nombre del modelo</label>
+                                <input type="text" class="form-control" id="model_name" name="model_name" placeholder="Ej. Matemáticas Secundaria v1" required>
+                                <div class="form-text">Asigna un nombre descriptivo para identificar este modelo.</div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">3. Parámetros de entrenamiento</label>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="epochs" class="form-label">Épocas de entrenamiento</label>
+                                        <input type="number" class="form-control" id="epochs" name="epochs" min="1" max="100" value="20" required>
+                                        <div class="form-text">Número de veces que el algoritmo procesará todo el conjunto de datos.</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="learning_rate" class="form-label">Tasa de aprendizaje</label>
+                                        <select class="form-select" id="learning_rate" name="learning_rate">
+                                            <option value="0.01">Rápido (0.01)</option>
+                                            <option value="0.005" selected>Medio (0.005)</option>
+                                            <option value="0.001">Lento (0.001)</option>
+                                        </select>
+                                        <div class="form-text">Velocidad a la que el modelo aprende de los datos.</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="batch_size" class="form-label">Tamaño del lote</label>
+                                        <select class="form-select" id="batch_size" name="batch_size">
+                                            <option value="16">Pequeño (16)</option>
+                                            <option value="32" selected>Medio (32)</option>
+                                            <option value="64">Grande (64)</option>
+                                            <option value="128">Muy grande (128)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validation_split" class="form-label">División de validación</label>
+                                        <select class="form-select" id="validation_split" name="validation_split">
+                                            <option value="0.1">10%</option>
+                                            <option value="0.2" selected>20%</option>
+                                            <option value="0.3">30%</option>
+                                        </select>
+                                        <div class="form-text">Porcentaje de datos reservados para validación.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="reset" class="btn btn-outline-secondary me-md-2">
+                                    <i class="fas fa-redo me-1"></i>Restablecer
+                                </button>
+                                <button type="submit" class="btn btn-accent">
+                                    <i class="fas fa-play me-1"></i>Iniciar entrenamiento
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Sobre el entrenamiento</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>El entrenamiento del modelo utiliza redes neuronales para analizar y aprender de los documentos seleccionados.</p>
+                        <p>Este proceso puede tomar tiempo dependiendo de la cantidad y complejidad de los documentos.</p>
+                        
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Importante:</strong> No cierre esta página durante el proceso de entrenamiento.
+                        </div>
+                        
+                        <h6 class="mt-4">¿Qué aprende el modelo?</h6>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Conceptos y definiciones clave
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Relaciones entre temas
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Patrones de preguntas y respuestas
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Terminología específica de la materia
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-history me-2"></i>Historial de entrenamientos</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-bold">Física Básica</span>
+                                    <span class="d-block text-muted small">Completado: 15/05/2023</span>
+                                </div>
+                                <span class="badge bg-success rounded-pill">Activo</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-bold">Historia Mundial</span>
+                                    <span class="d-block text-muted small">Completado: 10/05/2023</span>
+                                </div>
+                                <span class="badge bg-secondary rounded-pill">Inactivo</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-bold">Química General</span>
+                                    <span class="d-block text-muted small">Completado: 05/05/2023</span>
+                                </div>
+                                <span class="badge bg-secondary rounded-pill">Inactivo</span>
+                            </li>
+                        </ul>
+                        <div class="text-center p-3">
+                            <a href="#" class="btn btn-outline-success btn-sm">
+                                <i class="fas fa-list me-1"></i>Ver todos los modelos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Asistente Educativo IA</h5>
+                    <p>Una plataforma de aprendizaje asistido por inteligencia artificial para mejorar la experiencia educativa.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-white-50" href="../index.html">Inicio</a></li>
+                        <li><a class="text-white-50" href="upload.html">Documentos</a></li>
+                        <li><a class="text-white-50" href="train.html">Entrenamiento</a></li>
+                        <li><a class="text-white-50" href="assistant.html">Preguntas</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contacto</h5>
+                    <ul class="list-unstyled">
+                        <li><a class="text-white-50" href="mailto:asistentevirtual@gmail.com"><i class="fas fa-envelope me-2"></i>asistentevirtual@gmail.com</a></li>
+                        <li><a class="text-white-50" href="#"><i class="fas fa-phone me-2"></i>+57 3114255527</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 Asistente Educativo IA. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Marcar/desmarcar todos los documentos
+        const checkAll = document.getElementById('check-all');
+        const docChecks = document.querySelectorAll('.doc-check');
+        
+        checkAll.addEventListener('change', function() {
+            const isChecked = this.checked;
+            docChecks.forEach(check => check.checked = isChecked);
+        });
+        
+        docChecks.forEach(check => {
+            check.addEventListener('change', function() {
+                // Verificar si todos los checkboxes están marcados
+                const allChecked = Array.from(docChecks).every(c => c.checked);
+                // Actualizar el estado del checkbox "Seleccionar todos"
+                checkAll.checked = allChecked;
+                
+                // Si ningún checkbox está marcado, el botón de entrenamiento se deshabilita
+                const atLeastOneChecked = Array.from(docChecks).some(c => c.checked);
+                document.querySelector('button[type="submit"]').disabled = !atLeastOneChecked;
+            });
+        });
+        
+        // Validación del formulario
+        const trainingForm = document.getElementById('training-form');
+        trainingForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const selectedDocs = document.querySelectorAll('.doc-check:checked');
+            
+            if (selectedDocs.length === 0) {
+                alert('Por favor, seleccione al menos un documento para el entrenamiento.');
+                return false;
+            }
+            
+            // Mostrar modal o mensaje de carga
+            document.querySelector('button[type="submit"]').innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Procesando...';
+            document.querySelector('button[type="submit"]').disabled = true;
+            
+            // Simular proceso de entrenamiento
+            setTimeout(() => {
+                alert('¡Entrenamiento completado con éxito!');
+                document.querySelector('button[type="submit"]').innerHTML = '<i class="fas fa-play me-1"></i>Iniciar entrenamiento';
+                document.querySelector('button[type="submit"]').disabled = false;
+            }, 3000);
+            
+            return false;
+        });
+        
+        // Inicializar el estado del botón de envío
+        const atLeastOneChecked = Array.from(docChecks).some(c => c.checked);
+        document.querySelector('button[type="submit"]').disabled = !atLeastOneChecked;
+    });
+    </script>
+</body>
+</html>
